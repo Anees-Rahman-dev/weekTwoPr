@@ -1,0 +1,6 @@
+@WeekTwo_TaskOne_HostAddress = http://localhost:5045
+
+GET {{WeekTwo_TaskOne_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
