@@ -19,9 +19,24 @@ namespace WeekTwo_TaskOne.Controllers
         };
 
         [HttpGet]
-        public IActionResult GetId()
+        public IActionResult GetEmployees()
         {
             return Ok(emp);
         }
+
+        [HttpPost]
+        public IActionResult PostEmployees(Employees employees)
+        {
+            if (employees != null)
+            {
+                emp.Add(employees);
+                return Ok("added new Employees successFully");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+       
     }
 }
