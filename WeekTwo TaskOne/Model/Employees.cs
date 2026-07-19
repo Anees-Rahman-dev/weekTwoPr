@@ -1,12 +1,9 @@
-﻿
-
-namespace WeekTwo_TaskOne.Model
+﻿namespace WeekTwo_TaskOne.Model
 {
-    public class EmployeesWeekTwoPr1
+    public class Employees
     {
         public int Id { get; set; }
         public string Name { get; set; } = "";
-
         public int Age { get; set; }
     }
 }
