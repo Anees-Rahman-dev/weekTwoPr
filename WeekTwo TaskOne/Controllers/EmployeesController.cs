@@ -37,6 +37,21 @@ namespace WeekTwo_TaskOne.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetbyId(int id)
+        {
+            var getbyid = emp.Where(W => W.Id == id);
+
+            if (getbyid != null)
+            {
+                return Ok(getbyid);
+            }
+            else
+            {
+                return NotFound("cannot find employee with this id");
+            }
+        }
        
     }
 }
