@@ -41,15 +41,33 @@ namespace WeekTwo_TaskOne.Controllers
         [HttpGet("{id}")]
         public IActionResult GetbyId(int id)
         {
-            var getbyid = emp.Where(W => W.Id == id);
+            var getById = emp.Where(W => W.Id == id);
 
-            if (getbyid != null)
+            if (getById != null)
             {
-                return Ok(getbyid);
+                return Ok(getById);
             }
             else
             {
                 return NotFound("cannot find employee with this id");
+            }
+        }
+
+        [HttpPut("{id}{Id, Name, Age}")]
+        public IActionResult UpdateEmployees(int id, Employees data)
+        {
+            var getById = emp.Find(F => F.Id == id);
+
+            if (getById != null)
+            {
+                getById.Id = data.Id;
+                getById.Name = data.Name;
+                getById.Age = data.Age;
+                return Ok("successFully Updated");
+            }
+            else
+            {
+                return NotFound("there is some issue");
             }
         }
        
