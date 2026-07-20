@@ -53,21 +53,37 @@ namespace WeekTwo_TaskOne.Controllers
             }
         }
 
-        [HttpPut("{id}{Id, Name, Age}")]
+        [HttpPut("{id}")]
         public IActionResult UpdateEmployees(int id, Employees data)
         {
-            var getById = emp.Find(F => F.Id == id);
+            var employee = emp.Find(F => F.Id == id);
 
-            if (getById != null)
+            if (employee != null)
             {
-                getById.Id = data.Id;
-                getById.Name = data.Name;
-                getById.Age = data.Age;
+                employee.Name = data.Name;
+                employee.Age = data.Age;
                 return Ok("successFully Updated");
             }
             else
             {
                 return NotFound("there is some issue");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult delete(int id)
+        {
+            var getById = emp.Find(f => f.Id == id);
+
+
+            if (getById != null)
+            {
+                emp.Remove(getById);
+                return Ok("SuccesFully Deleted It");
+            }
+            else
+            {
+                return BadRequest("Cannot delete");
             }
         }
        
