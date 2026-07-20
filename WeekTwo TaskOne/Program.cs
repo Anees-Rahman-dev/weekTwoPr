@@ -10,6 +10,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddScoped<StudentService>();
+builder.Services.AddScoped<PlayerInfo>();
+
 
 var app = builder.Build();
 
