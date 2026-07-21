@@ -20,6 +20,20 @@ namespace WeekTwo_TaskOne.Controllers
         {
             return _playerService.GetAllPlayers();
         }
+        [HttpGet("{id}")]
+        public IActionResult GetPlayer(int id)
+        {
+            var player = _playerService.GetById(id);
+
+            if (player != null)
+            {
+                return Ok(player);
+            }
+            else
+            {
+                return NotFound("Couldnt Find the player");
+            }
+        }
 
        
     }
