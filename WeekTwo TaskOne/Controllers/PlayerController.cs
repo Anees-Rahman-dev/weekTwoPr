@@ -34,7 +34,23 @@ namespace WeekTwo_TaskOne.Controllers
                 return NotFound("Couldnt Find the player");
             }
         }
+        [HttpPut("{id}")]
+        public IActionResult updatePlayer(int id, Player playerinfo)
+        {
+            var player = _playerService.UpdatePlayer(id, playerinfo);
 
-       
+            if (player == null)
+            {
+                return NotFound("Cannot update it");
+            }
+            else
+            {
+                return Ok(player);
+            }
+        }
+
+
+
+
     }
 }
