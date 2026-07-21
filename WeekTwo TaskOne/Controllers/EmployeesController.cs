@@ -34,7 +34,7 @@ namespace WeekTwo_TaskOne.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest("Cannot Add Employees");
             }
         }
 
@@ -86,6 +86,8 @@ namespace WeekTwo_TaskOne.Controllers
                 return BadRequest("Cannot delete");
             }
         }
+
+        
        
     }
 }

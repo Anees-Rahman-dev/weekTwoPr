@@ -10,7 +10,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddScoped<StudentService>();
-builder.Services.AddScoped<PlayerInfo>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
 
 
 var app = builder.Build();
