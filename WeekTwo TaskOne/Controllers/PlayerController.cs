@@ -31,7 +31,7 @@ namespace WeekTwo_TaskOne.Controllers
             }
             else
             {
-                return NotFound("Couldnt Find the player");
+                return NotFound("Couldn't Find the player");
             }
         }
         [HttpPut("{id}")]
@@ -50,7 +50,30 @@ namespace WeekTwo_TaskOne.Controllers
         }
 
 
+        [HttpPost]
 
+        public IActionResult addPlayer(Player playerToAdd)
+        {
+            _playerService.AddPlayer(playerToAdd);
+            return Ok(playerToAdd);
+        }
+
+        [HttpDelete("{id}")]
+
+        public IActionResult deletePlayer(int id)
+        {
+            var player = _playerService.GetById(id);
+
+            if (player != null)
+            {
+                _playerService.DeletePlayer(id);
+                return Ok("player Has Deleted");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
 
     }
 }
