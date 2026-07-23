@@ -1,3 +1,4 @@
+using WeekTwo_TaskOne.MiddleWare;
 using WeekTwo_TaskOne.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<CustomMiddleWare>();
 
 app.UseAuthorization();
 

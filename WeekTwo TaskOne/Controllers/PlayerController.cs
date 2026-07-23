@@ -62,11 +62,9 @@ namespace WeekTwo_TaskOne.Controllers
 
         public IActionResult deletePlayer(int id)
         {
-            var player = _playerService.GetById(id);
 
-            if (player != null)
+            if (_playerService.DeletePlayer(id))
             {
-                _playerService.DeletePlayer(id);
                 return Ok("player Has Deleted");
             }
             else
