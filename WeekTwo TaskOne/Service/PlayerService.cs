@@ -11,26 +11,30 @@ namespace WeekTwo_TaskOne.Service
             new Player { Id = 3, Name = "Kaka", Age = 24, Club = "AC Milan", JerseyNumber = 7 }
         };
 
-        public List<Player> GetAllPlayers()
+        public async Task<List<Player>> GetAllPlayers()
         {
+            await Task.Delay(500);
             return players;
         }
 
-        public Player? GetById(int id)
+        public async Task<Player?> GetById(int id)
         {
+            await Task.Delay(500);
             var FoundId = players.Find(F => F.Id == id);
 
             return FoundId;
         }
 
-        public Player AddPlayer(Player player)
+        public async Task<Player> AddPlayer(Player player)
         {
+            await Task.Delay(500);
             players.Add(player);
             return player;
         }
 
-        public bool DeletePlayer(int id)
+        public async Task<bool> DeletePlayer(int id)
         {
+            await Task.Delay(500);
             var FoundId = players.Find(F => F.Id == id);
 
             if (FoundId == null)
@@ -45,8 +49,9 @@ namespace WeekTwo_TaskOne.Service
             }
         }
 
-        public bool UpdatePlayer(int id, Player player)
+        public async Task<bool> UpdatePlayer(int id, Player player)
         {
+            await Task.Delay(500);
             var FoundId = players.Find(F => F.Id == id);
 
             if (FoundId == null)
