@@ -33,7 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseMiddleware<CustomMiddleWare>();
+app.UseMiddleware<CustomMiddleware>();
 
 app.UseAuthorization();
 
