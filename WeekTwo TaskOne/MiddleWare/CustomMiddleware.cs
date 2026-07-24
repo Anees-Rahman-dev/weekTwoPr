@@ -2,26 +2,27 @@
 
 namespace WeekTwo_TaskOne.MiddleWare
 {
-    public class CustomMiddleWare
+   public class CustomMiddleware
     {
-        private readonly RequestDelegate _name;
-        public CustomMiddleWare(RequestDelegate name )
-        {
-            _name = name;
 
+        public RequestDelegate _next;
+        public CustomMiddleware(RequestDelegate next)
+        {
+            _next = next;
         }
 
-        public async Task Invoke(HttpContext context )
+        public async Task Invoke(HttpContext context)
         {
-            Console.WriteLine("==== Request has started ====");
-            Console.WriteLine($"Date {DateTime.Now}");
-            Console.WriteLine($"path {context.Request.Path}");
+            Console.WriteLine("=== request has started ===");
+            Console.WriteLine($"Time {DateTime.Now}");
+            Console.WriteLine($"Path {context.Request.Path}");
             Console.WriteLine($"Method {context.Request.Method}");
 
-            await _name(context);
+            await _next(context);
 
-            Console.WriteLine($"status : {context.Response.StatusCode}");
-            Console.WriteLine("Request has Ended");
+            Console.WriteLine("=== request has finished ===");
+
+            Console.WriteLine($"Respone {context.Response.StatusCode}");
         }
     }
 }

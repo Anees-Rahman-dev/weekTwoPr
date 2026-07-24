@@ -4,14 +4,14 @@ namespace WeekTwo_TaskOne.Service
 {
     public interface IPlayerService
     {
-        List<Player > GetAllPlayers();
+        Task<List<Player>> GetAllPlayers();
 
-        Player? GetById(int id);
+        Task<Player?> GetById(int id);
 
-        Player AddPlayer(Player player);
+        Task<Player> AddPlayer(Player player);
 
-        bool DeletePlayer(int id);
+        Task<bool> UpdatePlayer(int id, Player player);
 
-        bool UpdatePlayer(int id, Player player);
+        Task<bool> DeletePlayer(int id);
     }
 }

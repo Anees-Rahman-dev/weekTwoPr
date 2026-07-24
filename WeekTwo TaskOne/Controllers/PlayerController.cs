@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
 using WeekTwo_TaskOne.Model;
 using WeekTwo_TaskOne.Service;
 
@@ -16,14 +17,17 @@ namespace WeekTwo_TaskOne.Controllers
         }
 
         [HttpGet]
-        public List<Player> GetPlayers()
+        public async Task<IActionResult> GetPlayers()
         {
-            return _playerService.GetAllPlayers();
+            var player = await _playerService.GetAllPlayers();
+
+            return Ok(player);
         }
+
         [HttpGet("{id}")]
-        public IActionResult GetPlayer(int id)
+        public async Task<IActionResult> GetPlayer(int id)
         {
-            var player = _playerService.GetById(id);
+            var player = await _playerService.GetById(id);
 
             if (player != null)
             {
@@ -35,11 +39,11 @@ namespace WeekTwo_TaskOne.Controllers
             }
         }
         [HttpPut("{id}")]
-        public IActionResult updatePlayer(int id, Player playerinfo)
+        public async Task<IActionResult> updatePlayer(int id, Player playerinfo)
         {
-            var player = _playerService.UpdatePlayer(id, playerinfo);
+            var player = await _playerService.UpdatePlayer(id, playerinfo);
 
-            if (player == null)
+            if (!player )
             {
                 return NotFound("Cannot update it");
             }
@@ -52,24 +56,29 @@ namespace WeekTwo_TaskOne.Controllers
 
         [HttpPost]
 
-        public IActionResult addPlayer(Player playerToAdd)
+        public async Task<IActionResult> addPlayer(Player playerToAdd)
         {
-            _playerService.AddPlayer(playerToAdd);
-            return Ok(playerToAdd);
+          var newPlayer =  await _playerService.AddPlayer(playerToAdd);
+
+            return CreatedAtAction(nameof(GetPlayer),
+                new {id = newPlayer.Id},
+                newPlayer);
+
         }
 
         [HttpDelete("{id}")]
 
-        public IActionResult deletePlayer(int id)
+        public async Task<IActionResult> deletePlayer(int id)
         {
-
-            if (_playerService.DeletePlayer(id))
+            var DeletePlayer = await _playerService.DeletePlayer(id);
+            if (!DeletePlayer)
             {
-                return Ok("player Has Deleted");
+                return BadRequest();
+                
             }
             else
             {
-                return BadRequest();
+                return Ok("player Has Deleted");
             }
         }
 
