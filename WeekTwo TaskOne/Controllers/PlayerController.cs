@@ -27,16 +27,21 @@ namespace WeekTwo_TaskOne.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPlayer(int id)
         {
-            var player = await _playerService.GetById(id);
+            try
+            {
+                var player = await _playerService.GetById(id);
 
-            if (player != null)
-            {
+                if (player == null)
+
+                    return NotFound("player not found");
+
                 return Ok(player);
-            }
-            else
+            }catch (Exception ex)
             {
-                return NotFound("Couldn't Find the player");
+                return StatusCode(500,ex.Message);
             }
+            
+           
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> updatePlayer(int id, Player playerinfo)
@@ -49,7 +54,7 @@ namespace WeekTwo_TaskOne.Controllers
             }
             else
             {
-                return Ok(player);
+                return Ok("player added successfully");
             }
         }
 
@@ -73,12 +78,12 @@ namespace WeekTwo_TaskOne.Controllers
             var DeletePlayer = await _playerService.DeletePlayer(id);
             if (!DeletePlayer)
             {
-                return BadRequest();
+                return NotFound("player not found");
                 
             }
             else
             {
-                return Ok("player Has Deleted");
+                return NoContent();
             }
         }
 
